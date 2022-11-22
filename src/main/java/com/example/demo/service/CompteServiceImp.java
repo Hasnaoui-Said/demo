@@ -9,7 +9,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-public class CompteService {
+public class CompteServiceImp implements CompteService {
     @Transactional
     public int deleteByRef(String ref) {
         return compteDao.deleteByRef(ref);
@@ -20,7 +20,7 @@ public class CompteService {
     }
 
     public List<Compte> findByNamesLikeAndSoldeGreaterThan(String name, long solde) {
-        return compteDao.findByNamesLikeAndSoldeGreaterThan(name, solde);
+        return compteDao.findByNameLikeAndSoldeGreaterThan(name, solde);
     }
 
     public List<Compte> findAll() {
@@ -32,12 +32,11 @@ public class CompteService {
         return compteDao.getOne(aLong);
     }
 
-    public int save(Compte compte) {
+    public Compte save(Compte compte) {
         Compte  compte1 = this.findByRef(compte.getRef());
-        if(compte1 != null) return  -1;
+        if(compte1 != null) return null;
 
-        compteDao.save(compte);
-        return 1;
+        return compteDao.save(compte);
     }
 
     @Autowired

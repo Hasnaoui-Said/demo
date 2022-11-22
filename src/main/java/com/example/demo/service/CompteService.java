@@ -12,6 +12,6 @@ public interface CompteService {
      List<Compte> findByNamesLikeAndSoldeGreaterThan(String name, long solde);
      List<Compte> findAll();
      Compte getOne(Long aLong);
-     int save(Compte compte);
+     Compte save(Compte compte);
 
 }
